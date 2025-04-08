@@ -18,6 +18,12 @@ public class GlobalExceptionHandler {
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body(ex.getMessage());
     }
 	
+	@ExceptionHandler(NoTransactionDataFoundException.class)
+	public ResponseEntity<String> handleNoTransactionDataFoundException(NoTransactionDataFoundException ex) {
+	    return new ResponseEntity<>(ex.getMessage(), HttpStatus.NOT_FOUND);
+	}
+
+	
 	@ExceptionHandler(DataAccessException.class)
     public ResponseEntity<Map<String, Object>> handleDatabaseException(DataAccessException ex) {
         Map<String, Object> error = new HashMap<>();
