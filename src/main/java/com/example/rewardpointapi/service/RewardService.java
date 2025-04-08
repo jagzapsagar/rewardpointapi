@@ -90,7 +90,7 @@ public class RewardService {
 		return response;
 	}
 
-	private int calculatePoints(Double amount) {
+	public int calculatePoints(Double amount) {
 		int points = 0;
 		if (amount > 100) {
 			points += (int) (2 * (amount - 100));
