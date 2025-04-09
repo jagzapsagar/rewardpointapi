@@ -25,7 +25,8 @@ public class RewardService {
 
 	@Autowired
 	private TransactionRepository transactionRepository;
-
+	
+	//Calculates reward points for a specific customer using their transaction history.
 	public RewardDTO calculateRewardsForCustomer(Long customerId) {
 		List<Transaction> customerTransactions = transactionRepository.findByCustomerId(customerId);
 
@@ -35,7 +36,7 @@ public class RewardService {
 
 		return buildRewardDTO(customerId, customerTransactions);
 	}
-
+	//Retrieves reward points for all customers by grouping transaction history.
 	public List<RewardDTO> getAllCustomerRewards() {
 		List<Transaction> transactions = transactionRepository.findAll();
 		if (transactions.isEmpty()) {
@@ -51,7 +52,8 @@ public class RewardService {
 		}
 		return responses;
 	}
-
+	/*Saves a new transaction record for a customer. Automatically sets the current date
+    * if transaction date is not provided.*/
 	public void saveTransaction(TransactionRequestDTO request) {
 		if (request.getAmount() == null || request.getAmount() <= 0) {
 			throw new IllegalArgumentException("Transaction amount must be greater than 0");
@@ -67,7 +69,7 @@ public class RewardService {
 		transactionRepository.save(txn);
 	}
 
-	// Common logic
+	// Helper method to calculate reward details and build a RewardDTO for a customer.
 	private RewardDTO buildRewardDTO(Long customerId, List<Transaction> customerTransactions) {
 		String customerName = customerTransactions.get(0).getCustomerName();
 		Map<String, Integer> monthlyRewards = new HashMap<>();
@@ -89,7 +91,12 @@ public class RewardService {
 
 		return response;
 	}
-
+    /* Calculates reward points based on the amount spent in a transaction.
+     * 
+     *     No points for amount ≤ ₹50
+     *     1 point per ₹ over ₹50 and up to ₹100
+     *     2 points per ₹ over ₹100
+     */
 	public int calculatePoints(Double amount) {
 		int points = 0;
 		if (amount > 100) {
