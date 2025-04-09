@@ -16,6 +16,8 @@ import com.example.rewardpointapi.dto.RewardDTO;
 import com.example.rewardpointapi.dto.TransactionRequestDTO;
 import com.example.rewardpointapi.service.RewardService;
 
+import jakarta.validation.Valid;
+
 @RestController
 @RequestMapping("/rewards")
 public class RewardController {
@@ -34,7 +36,7 @@ public class RewardController {
 	}
 
 	@PostMapping("/add")
-	public ResponseEntity<String> addTransaction(@RequestBody TransactionRequestDTO request) {
+	public ResponseEntity<String> addTransaction(@Valid @RequestBody TransactionRequestDTO request) {
 		rewardService.saveTransaction(request);
 		return ResponseEntity.status(HttpStatus.CREATED).body("Transaction saved successfully");
 	}

@@ -2,8 +2,14 @@ package com.example.rewardpointapi.dto;
 
 import java.time.LocalDateTime;
 
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+
 public class TransactionRequestDTO {
+
+	@NotNull(message = "Customer ID is required")
 	private Long customerId;
+	@NotBlank(message = "Customer name is required")
 	private String customerName;
 	private Double amount;
 	private LocalDateTime transactionDate;
