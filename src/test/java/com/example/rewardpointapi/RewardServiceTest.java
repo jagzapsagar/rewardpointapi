@@ -18,7 +18,7 @@ import org.mockito.MockitoAnnotations;
 import com.example.rewardpointapi.dto.RewardDTO;
 import com.example.rewardpointapi.entity.Transaction;
 import com.example.rewardpointapi.repository.TransactionRepository;
-import com.example.rewardpointapi.service.RewardService;
+import com.example.rewardpointapi.service.RewardServiceIMPL;
 
 public class RewardServiceTest {
 	
@@ -26,7 +26,7 @@ public class RewardServiceTest {
     private TransactionRepository transactionRepository;
 
     @InjectMocks
-    private RewardService rewardService;
+    private RewardServiceIMPL rewardService;
 
     public RewardServiceTest() {
         MockitoAnnotations.openMocks(this);

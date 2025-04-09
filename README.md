@@ -34,3 +34,12 @@ The application exposes APIs to:
 ### 1. Clone the Repository
 
 git clone https://github.com/jagzapsagar/rewardpointapi/tree/main
+
+## JSON for post
+	{
+  "customerId": 101,
+  "customerName": "Amit",
+  "amount": 120.50,
+  "transactionDate": "2025-04-08T10:30:00"
+	}
+	
