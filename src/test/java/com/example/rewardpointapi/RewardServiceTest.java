@@ -18,7 +18,7 @@ import org.mockito.MockitoAnnotations;
 import com.example.rewardpointapi.dto.RewardDTO;
 import com.example.rewardpointapi.entity.Transaction;
 import com.example.rewardpointapi.repository.TransactionRepository;
-import com.example.rewardpointapi.service.RewardServiceIMPL;
+import com.example.rewardpointapi.service.impl.RewardServiceIMPL;
 
 public class RewardServiceTest {
 	
