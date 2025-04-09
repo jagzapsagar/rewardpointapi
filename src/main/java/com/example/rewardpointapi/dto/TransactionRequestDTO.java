@@ -4,10 +4,12 @@ import java.time.LocalDateTime;
 
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Positive;
 
 public class TransactionRequestDTO {
 
 	@NotNull(message = "Customer ID is required")
+	@Positive(message = "Customer ID must be a positive number")
 	private Long customerId;
 	@NotBlank(message = "Customer name is required")
 	private String customerName;
