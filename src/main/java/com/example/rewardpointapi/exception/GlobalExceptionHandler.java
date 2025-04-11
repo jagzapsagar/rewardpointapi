@@ -13,11 +13,16 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 
 @ControllerAdvice
 public class GlobalExceptionHandler {
+	/**
+	 * Handles resource not found errors (HTTP 404).
+	 */
 	@ExceptionHandler(ResourceNotFoundException.class)
 	public ResponseEntity<String> handleNotFound(ResourceNotFoundException ex) {
 		return ResponseEntity.status(HttpStatus.NOT_FOUND).body(ex.getMessage());
 	}
-
+	/**
+	 * Handles no transaction data found errors (HTTP 404).
+	 */
 	@ExceptionHandler(NoTransactionDataFoundException.class)
 	public ResponseEntity<String> handleNoTransactionDataFoundException(NoTransactionDataFoundException ex) {
 		return new ResponseEntity<>(ex.getMessage(), HttpStatus.NOT_FOUND);
