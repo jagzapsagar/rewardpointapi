@@ -1,8 +1,14 @@
 package com.example.rewardpointapi;
 
-import java.time.LocalDateTime;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
+import java.time.LocalDateTime;
+import java.util.Collections;
+
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,16 +17,11 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 
-import java.time.LocalDateTime;
-import java.util.Collections;
-
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
-
 import com.example.rewardpointapi.controller.RewardController;
 import com.example.rewardpointapi.dto.RewardDTO;
 import com.example.rewardpointapi.dto.TransactionRequestDTO;
 import com.example.rewardpointapi.service.RewardService;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 // to load only the web layer, specifically the RewardController.
 @WebMvcTest(RewardController.class)
