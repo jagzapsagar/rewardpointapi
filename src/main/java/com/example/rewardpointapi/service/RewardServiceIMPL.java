@@ -1,4 +1,4 @@
-package com.example.rewardpointapi.service.impl;
+package com.example.rewardpointapi.service;
 
 import java.time.LocalDateTime;
 import java.time.YearMonth;
@@ -19,7 +19,6 @@ import com.example.rewardpointapi.entity.Transaction;
 import com.example.rewardpointapi.exception.NoTransactionDataFoundException;
 import com.example.rewardpointapi.exception.ResourceNotFoundException;
 import com.example.rewardpointapi.repository.TransactionRepository;
-import com.example.rewardpointapi.service.RewardService;
 
 @Service
 public class RewardServiceIMPL implements RewardService {
