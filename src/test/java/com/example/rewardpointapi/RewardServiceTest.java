@@ -17,46 +17,69 @@ import org.mockito.MockitoAnnotations;
 
 import com.example.rewardpointapi.dto.RewardDTO;
 import com.example.rewardpointapi.entity.Transaction;
+import com.example.rewardpointapi.exception.NoTransactionDataFoundException;
+import com.example.rewardpointapi.exception.ResourceNotFoundException;
 import com.example.rewardpointapi.repository.TransactionRepository;
 import com.example.rewardpointapi.service.RewardServiceIMPL;
 
 public class RewardServiceTest {
-	
-    @Mock
-    private TransactionRepository transactionRepository;
 
-    @InjectMocks
-    private RewardServiceIMPL rewardService;
+	@Mock
+	private TransactionRepository transactionRepository;
 
-    public RewardServiceTest() {
-        MockitoAnnotations.openMocks(this);
-    }
-    
-    @Test
-    public void testGetCustomerRewards_withNoData() {
-        when(transactionRepository.findByCustomerId(99L)).thenReturn(Collections.emptyList());
-        assertThrows(RuntimeException.class, () -> rewardService.calculateRewardsForCustomer(99L));
-    }
-    
-    @Test
-    void testPointsExactly100() {
-        assertEquals(50, rewardService.calculatePoints(100.0)); // 50 (50 to 100)
-    }
-    
-    
-    @Test
-    public void testGetCustomerRewards_withValidData() {
-        Transaction txn1 = new Transaction(1001L, 1L, "John", 120.0, LocalDateTime.now());
-        Transaction txn2 = new Transaction(1002L, 1L, "John", 70.0, LocalDateTime.now());
-        when(transactionRepository.findByCustomerId(1L)).thenReturn(Arrays.asList(txn1, txn2));
+	@InjectMocks
+	private RewardServiceIMPL rewardService;
 
-        RewardDTO response = rewardService.calculateRewardsForCustomer(1L);
+	public RewardServiceTest() {
+		MockitoAnnotations.openMocks(this);
+	}
 
-        assertEquals(1L, response.getCustomerId());
-        assertEquals("John", response.getCustomerName());
-        assertNotNull(response.getMonthlyRewards());
-        assertTrue(response.getTotalPoints() > 0);
-    }
+	/**
+	 * Scenario: - Given: A customer ID that does not exist in the database. - When:
+	 * The method is called to calculate rewards for this customer. - Then: It
+	 * should throw a ResourceNotFoundException.
+	 */
+	@Test
+	void testGetCustomerRewards_InvalidCustomerId_ThrowsException() {
+		Long invalidCustomerId = 999L;
+		when(transactionRepository.findByCustomerId(invalidCustomerId)).thenReturn(Collections.emptyList());
 
+		assertThrows(ResourceNotFoundException.class, () -> {
+			rewardService.calculateRewardsForCustomer(invalidCustomerId);
+		});
+	}
+
+	/**
+	 * Scenario: - Given: The transaction repository returns an empty list. - When:
+	 * The method is called to fetch rewards for all customers. - Then: It should
+	 * throw a NoTransactionDataFoundException.
+	 */
+	@Test
+	void testGetAllCustomerRewards_NoTransactionsFound() {
+		when(transactionRepository.findAll()).thenReturn(Collections.emptyList());
+
+		assertThrows(NoTransactionDataFoundException.class, () -> {
+			rewardService.getAllCustomerRewards();
+		});
+	}
+
+	@Test
+	void testPointsExactly100() {
+		assertEquals(50, rewardService.calculatePoints(100.0)); // 50 (50 to 100)
+	}
+
+	@Test
+	public void testGetCustomerRewards_withValidData() {
+		Transaction txn1 = new Transaction(1001L, 1L, "John", 120.0, LocalDateTime.now());
+		Transaction txn2 = new Transaction(1002L, 1L, "John", 70.0, LocalDateTime.now());
+		when(transactionRepository.findByCustomerId(1L)).thenReturn(Arrays.asList(txn1, txn2));
+
+		RewardDTO response = rewardService.calculateRewardsForCustomer(1L);
+
+		assertEquals(1L, response.getCustomerId());
+		assertEquals("John", response.getCustomerName());
+		assertNotNull(response.getMonthlyRewards());
+		assertTrue(response.getTotalPoints() > 0);
+	}
 
 }

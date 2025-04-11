@@ -55,8 +55,8 @@ public class GlobalExceptionHandler {
 	public ResponseEntity<Map<String, Object>> handleGenericException(Exception ex) {
 		Map<String, Object> error = new HashMap<>();
 		error.put("timestamp", LocalDateTime.now());
-		error.put("status", HttpStatus.INTERNAL_SERVER_ERROR.value());
-		error.put("error", "Internal Server Error");//500 Internal Server Error.
+		error.put("status", HttpStatus.INTERNAL_SERVER_ERROR.value());//500 Internal Server Error.
+		error.put("error", "Internal Server Error");
 		error.put("message", ex.getMessage());
 		return new ResponseEntity<>(error, HttpStatus.INTERNAL_SERVER_ERROR);
 	}
