@@ -22,12 +22,19 @@ public class GlobalExceptionHandler {
 	public ResponseEntity<String> handleNoTransactionDataFoundException(NoTransactionDataFoundException ex) {
 		return new ResponseEntity<>(ex.getMessage(), HttpStatus.NOT_FOUND);
 	}
-
+	/**
+	 * Handles IllegalArgumentException thrown when transaction input validation fails,
+	 * such as when the transaction amount is null or less than or equal to zero.
+	 * Returns a 400 Bad Request response with an appropriate error message.
+	 */
 	@ExceptionHandler(IllegalArgumentException.class)
 	public ResponseEntity<String> handleInvalidRequest(IllegalArgumentException ex) {
 		return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(ex.getMessage());
 	}
-
+	/**
+	 * Handles validation errors triggered by @Valid in controller methods.
+	 * This catches violations of validation annotations (e.g., @NotNull, @Positive) defined in DTO classes.
+	 */
 	@ExceptionHandler(MethodArgumentNotValidException.class)
 	public ResponseEntity<String> handleValidationExceptions(MethodArgumentNotValidException ex) {
 		String errorMessage = ex.getBindingResult().getFieldErrors().stream()
@@ -35,12 +42,16 @@ public class GlobalExceptionHandler {
 		return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Validation failed: " + errorMessage);
 	}
 
+	/**
+	 * Global fallback handler for any uncaught exceptions.
+	 * Ensures consistent error response for unexpected server errors.
+	 */
 	@ExceptionHandler(Exception.class)
 	public ResponseEntity<Map<String, Object>> handleGenericException(Exception ex) {
 		Map<String, Object> error = new HashMap<>();
 		error.put("timestamp", LocalDateTime.now());
 		error.put("status", HttpStatus.INTERNAL_SERVER_ERROR.value());
-		error.put("error", "Internal Server Error");
+		error.put("error", "Internal Server Error");//500 Internal Server Error.
 		error.put("message", ex.getMessage());
 		return new ResponseEntity<>(error, HttpStatus.INTERNAL_SERVER_ERROR);
 	}
