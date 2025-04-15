@@ -23,6 +23,7 @@ import com.example.rewardpointapi.dto.TransactionRequestDTO;
 import com.example.rewardpointapi.exception.NoTransactionDataFoundException;
 import com.example.rewardpointapi.service.RewardService;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import static org.mockito.Mockito.when;
 
 // to load only the web layer, specifically the RewardController.
 @WebMvcTest(RewardController.class)
@@ -46,6 +47,18 @@ public class RewardControllerTest {
 				.thenThrow(new NoTransactionDataFoundException("No transaction records found"));
 
 		mockMvc.perform(get("/rewards")).andExpect(status().isNotFound());
+	}
+
+	@Test
+	void testGetRewardsByCustomerId_NotFound() throws Exception {
+		Long customerId = 1L;
+		String expectedMessage = "No transactions found for customer ID: " + customerId;
+		// Mock the service layer to throw exception when this customer ID is used
+		when(rewardService.calculateRewardsForCustomer(customerId))
+				.thenThrow(new NoTransactionDataFoundException(expectedMessage));
+
+		mockMvc.perform(get("/rewards/{customerId}", customerId)).andExpect(status().isNotFound())
+				.andExpect(content().string(expectedMessage));
 	}
 
 	// Prepares a mock RewardDTO with sample data.
@@ -77,4 +90,5 @@ public class RewardControllerTest {
 				.content(objectMapper.writeValueAsString(requestDTO))).andExpect(status().isCreated())
 				.andExpect(content().string("Transaction saved successfully"));
 	}
+
 }
