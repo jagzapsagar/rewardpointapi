@@ -20,6 +20,7 @@ import org.springframework.test.web.servlet.MockMvc;
 import com.example.rewardpointapi.controller.RewardController;
 import com.example.rewardpointapi.dto.RewardDTO;
 import com.example.rewardpointapi.dto.TransactionRequestDTO;
+import com.example.rewardpointapi.exception.NoTransactionDataFoundException;
 import com.example.rewardpointapi.service.RewardService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
@@ -39,13 +40,12 @@ public class RewardControllerTest {
 	@Autowired
 	private ObjectMapper objectMapper;
 
-	// Mocks the behavior of rewardService.getAllCustomerRewards() to return an
-	// empty list.
 	@Test
-	void testGetRewards() throws Exception {
-		Mockito.when(rewardService.getAllCustomerRewards()).thenReturn(Collections.emptyList());
+	void testGetRewards_NoTransactionData() throws Exception {
+		Mockito.when(rewardService.getAllCustomerRewards())
+				.thenThrow(new NoTransactionDataFoundException("No transaction records found"));
 
-		mockMvc.perform(get("/rewards")).andExpect(status().isOk());
+		mockMvc.perform(get("/rewards")).andExpect(status().isNotFound());
 	}
 
 	// Prepares a mock RewardDTO with sample data.
