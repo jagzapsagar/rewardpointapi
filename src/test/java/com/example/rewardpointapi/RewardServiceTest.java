@@ -16,6 +16,7 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
 import com.example.rewardpointapi.dto.RewardDTO;
+import com.example.rewardpointapi.dto.TransactionRequestDTO;
 import com.example.rewardpointapi.entity.Transaction;
 import com.example.rewardpointapi.exception.NoTransactionDataFoundException;
 import com.example.rewardpointapi.exception.ResourceNotFoundException;
@@ -80,6 +81,21 @@ public class RewardServiceTest {
 		assertEquals("John", response.getCustomerName());
 		assertNotNull(response.getMonthlyRewards());
 		assertTrue(response.getTotalPoints() > 0);
+	}
+
+	@Test
+	void testSaveTransaction_WithInvalidAmount_ShouldThrowException() {
+		// Prepare input with invalid amount (e.g., 0 or null)
+		TransactionRequestDTO invalidRequest = new TransactionRequestDTO();
+		invalidRequest.setCustomerId(101L);
+		invalidRequest.setCustomerName("User");
+		invalidRequest.setAmount(0.0); // or set null to test null case
+		invalidRequest.setTransactionDate(LocalDateTime.now());
+
+		// Expect IllegalArgumentException when calling the service
+		assertThrows(IllegalArgumentException.class, () -> {
+			rewardService.saveTransaction(invalidRequest);
+		});
 	}
 
 }
