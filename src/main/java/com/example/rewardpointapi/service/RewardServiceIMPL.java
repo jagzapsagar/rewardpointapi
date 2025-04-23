@@ -28,6 +28,7 @@ public class RewardServiceIMPL implements RewardService {
 
 	// Calculates reward points for a specific customer using their transaction
 	// history.
+	@Override
 	public RewardDTO calculateRewardsForCustomer(Long customerId) {
 		List<Transaction> customerTransactions = transactionRepository.findByCustomerId(customerId);
 
@@ -39,6 +40,7 @@ public class RewardServiceIMPL implements RewardService {
 	}
 
 	// Retrieves reward points for all customers by grouping transaction history.
+	@Override
 	public List<RewardDTO> getAllCustomerRewards() {
 		List<Transaction> transactions = transactionRepository.findAll();
 		if (transactions.isEmpty()) {
@@ -59,6 +61,7 @@ public class RewardServiceIMPL implements RewardService {
 	 * Saves a new transaction record for a customer. Automatically sets the current
 	 * date if transaction date is not provided.
 	 */
+	@Override
 	public void saveTransaction(TransactionRequestDTO request) {
 		if (request.getAmount() == null || request.getAmount() <= 0) {
 			throw new IllegalArgumentException("Transaction amount must be greater than 0");
