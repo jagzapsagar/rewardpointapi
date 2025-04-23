@@ -39,7 +39,8 @@ The application calculates **reward points** for customers based on the amount t
 	  "amount": 120.50,
 	  "transactionDate": "2025-04-08T10:30:00"
 	}
-	 Response: 201 Created – Transaction saved successfully.
+	` ``` `
+	Response: 201 Created – Transaction saved successfully.
 	 
 2.  Get All Customer Rewards
 	URL: GET /rewards
