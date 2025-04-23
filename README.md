@@ -1,4 +1,4 @@
-# Spring Boot Project with PostgrSql Database
+# Spring Boot Project with H2 Database
 
 This is a Spring Boot-based RESTful application that manages customer 
 transactions and computes reward points based on business rules, 
@@ -11,7 +11,7 @@ simulating a real-world customer loyalty program.
 - Java
 - Spring Boot
 - Spring Data JPA
-- PostgreSQL Database
+- H2 Database
 - Maven
 - Postman
 
@@ -127,24 +127,26 @@ reward-points-api/
 ## Database Table Structure
 
 ### transactions Table
+H2 Console: http://localhost:8081/h2-console
+JDBC URL: jdbc:h2:mem:rewarddb
 
 | Column Name       | Data Type   | Description                                 |
 |-------------------|-------------|---------------------------------------------|
 | `id`              | BIGSERIAL   | Primary key, auto-generated ID              |
-| `customer_id`	    | BIGINT      | Unique ID of the customer                   |
-| `customer_name`   | VARCHAR     | Name of the customer                        |
+| `customerid`	    | BIGINT      | Unique ID of the customer                   |
+| `customername`    | VARCHAR     | Name of the customer                        |
 | `amount`          | DECIMAL     | Transaction amount                          |
-| `transaction_date`| TIMESTAMP   | Date and time when the transaction occurred |
+| `transactiondate` | TIMESTAMP   | Date and time when the transaction occurred |
 
-### Sample DDL (PostgreSQL)
+### Sample DDL
 
 ```sql
 CREATE TABLE transactions (
     id BIGSERIAL PRIMARY KEY,
-    customer_id BIGINT NOT NULL,
-    customer_name VARCHAR(255) NOT NULL,
+    customerid BIGINT NOT NULL,
+    customername VARCHAR(255) NOT NULL,
     amount DECIMAL(10, 2) NOT NULL,
-    transaction_date TIMESTAMP NOT NULL
+    transactiondate TIMESTAMP NOT NULL
 );
 ```
 
