@@ -27,6 +27,18 @@ The application calculates **reward points** for customers based on the amount t
 
  API Endpoints
 1. Add transactions
+
+	**URL:** `POST /rewards/add`  
+	**Description:** Adds a new transaction for a customer.
+
+	**Request Example:**
+	```json
+	{
+	  "customerId": 101,
+	  "customerName": "Amit",
+	  "amount": 120.50,
+	  "transactionDate": "2025-04-08T10:30:00"
+	}
 	URL: POST /rewards/add
 	Description: Adds a new transaction for a customer.
 	{
