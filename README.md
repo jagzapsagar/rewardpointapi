@@ -25,8 +25,8 @@ The application calculates **reward points** for customers based on the amount t
 - **1 point** for every ₹1 spent over ₹50 up to ₹100
 - **2 points** for every ₹1 spent over ₹100
 
-📡 API Endpoints
-1. ➕Add transactions
+ API Endpoints
+1. Add transactions
 	URL: POST /rewards/add
 	Description: Adds a new transaction for a customer.
 	{
@@ -37,7 +37,7 @@ The application calculates **reward points** for customers based on the amount t
 	 }
 	 Response: 201 Created – Transaction saved successfully.
 	 
-2. 📥 Get All Customer Rewards
+2.  Get All Customer Rewards
 	URL: GET /rewards
 	Description: Returns reward points summary for all customers.
 	Response Example:
@@ -60,7 +60,7 @@ The application calculates **reward points** for customers based on the amount t
  	 }
 	]
 	
-3. 🔍 Get Rewards by Customer ID
+3.  Get Rewards by Customer ID
 	URL: GET /rewards/{customerId}
 	Description: Fetches reward points details for a specific customer.
 	Path Variable: customerId — ID of the customer
@@ -81,7 +81,9 @@ The application calculates **reward points** for customers based on the amount t
 
 git clone https://github.com/jagzapsagar/rewardpointapi/tree/main
 
-## 📁 Project Structure
+## Project Structure
+
+```text
 reward-points-api/
 ├── src/
 │   ├── main/
@@ -103,8 +105,8 @@ reward-points-api/
 │   │   │               ├── repository/
 │   │   │               │   └── TransactionRepository.java
 │   │   │               ├── service/
-│   │   │               │   ├── RewardService.java          # Interface
-│   │   │               │   └── RewardServiceImpl.java      # Implementation
+│   │   │               │   ├── RewardService.java
+│   │   │               │   └── RewardServiceImpl.java
 │   │   │               └── RewardPointsApiApplication.java
 │   │   └── resources/
 │   │       └── application.properties
@@ -119,8 +121,10 @@ reward-points-api/
 ├── .gitignore
 ├── pom.xml
 └── README.md
+```
 
-## 🧩 Database Table Structure
+
+## Database Table Structure
 
 ### transactions Table
 
@@ -132,7 +136,7 @@ reward-points-api/
 | `amount`          | DECIMAL     | Transaction amount                          |
 | `transaction_date`| TIMESTAMP   | Date and time when the transaction occurred |
 
-### 📄 Sample DDL (PostgreSQL)
+### Sample DDL (PostgreSQL)
 
 ```sql
 CREATE TABLE transactions (
