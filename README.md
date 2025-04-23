@@ -66,6 +66,7 @@ The application calculates **reward points** for customers based on the amount t
     "totalPoints": 40
   }
 ]
+```
 	
 3.  Get Rewards by Customer ID
 	**URL:** `GET /rewards/{customerId}`  
@@ -82,6 +83,7 @@ The application calculates **reward points** for customers based on the amount t
   },
   "totalPoints": 90
 }
+```
 
 
 ## Getting Started
