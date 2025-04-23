@@ -34,7 +34,7 @@ The application calculates **reward points** for customers based on the amount t
 	**Request Example:**
 	```json
 	{
-	  "customerId": 101,
+	 "customerId": 101,
  	 "customerName": "Amit",
  	 "amount": 120.50,
  	 "transactionDate": "2025-04-08T10:30:00"
@@ -43,41 +43,45 @@ The application calculates **reward points** for customers based on the amount t
 	Response: 201 Created – Transaction saved successfully.
 	 
 2.  Get All Customer Rewards
-	URL: GET /rewards
-	Description: Returns reward points summary for all customers.
-	Response Example:
-	[
- 	 {
+	**URL:** `GET /rewards`  
+	**Description:** Returns reward points summary for all customers.
+
+	**Response Example:**
+```json
+[
+  {
     "customerId": 101,
     "customerName": "Amit",
     "monthlyRewards": {
       "April-2025": 90
     },
     "totalPoints": 90
- 	 },
- 	 {
+  },
+  {
     "customerId": 102,
     "customerName": "Ravi",
     "monthlyRewards": {
       "April-2025": 40
     },
     "totalPoints": 40
- 	 }
-	]
+  }
+]
 	
 3.  Get Rewards by Customer ID
-	URL: GET /rewards/{customerId}
-	Description: Fetches reward points details for a specific customer.
-	Path Variable: customerId — ID of the customer
-	Response Example:
-	{
-   "customerId": 101,
-   "customerName": "Amit",
-   "monthlyRewards": {
+	**URL:** `GET /rewards/{customerId}`  
+	**Description:** Fetches reward points details for a specific customer.  
+	**Path Variable:** `customerId` – ID of the customer.
+
+	**Response Example:**
+```json
+{
+  "customerId": 101,
+  "customerName": "Amit",
+  "monthlyRewards": {
     "April-2025": 90
-   },
-   "totalPoints": 90
-    }
+  },
+  "totalPoints": 90
+}
 
 
 ## Getting Started
