@@ -28,8 +28,8 @@ The application calculates **reward points** for customers based on the amount t
  API Endpoints
 1. Add transactions
 
-	**URL:** `POST /rewards/add`  
-	**Description:** Adds a new transaction for a customer.
+	- **URL:** `POST /rewards/add`  
+	- **Description:** Adds a new transaction for a customer.
 
 	**Request Example:**
 	```json
@@ -70,8 +70,8 @@ The application calculates **reward points** for customers based on the amount t
 	
 3.  Get Rewards by Customer ID
 	- **URL:** `GET /rewards/{customerId}`  
-	**Description:** Fetches reward points details for a specific customer.  
-	**Path Variable:** `customerId` – ID of the customer.
+	- **Description:** Fetches reward points details for a specific customer.  
+	- **Path Variable:** `customerId` – ID of the customer.
 
 	**Response Example:**
 ```json
