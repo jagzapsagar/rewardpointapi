@@ -43,8 +43,8 @@ The application calculates **reward points** for customers based on the amount t
 	Response: 201 Created – Transaction saved successfully.
 	 
 2.  Get All Customer Rewards
-	**URL:** `GET /rewards`  
-	**Description:** Returns reward points summary for all customers.
+	- **URL:** `GET /rewards`  
+	- **Description:** Returns reward points summary for all customers.
 
 	**Response Example:**
 ```json
@@ -69,7 +69,7 @@ The application calculates **reward points** for customers based on the amount t
 ```
 	
 3.  Get Rewards by Customer ID
-	**URL:** `GET /rewards/{customerId}`  
+	- **URL:** `GET /rewards/{customerId}`  
 	**Description:** Fetches reward points details for a specific customer.  
 	**Path Variable:** `customerId` – ID of the customer.
 
