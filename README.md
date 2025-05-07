@@ -146,20 +146,20 @@ JDBC URL: jdbc:h2:mem:rewarddb
 | Column Name       | Data Type   | Description                                 |
 |-------------------|-------------|---------------------------------------------|
 | `id`              | BIGSERIAL   | Primary key, auto-generated ID              |
-| `customerid`	    | BIGINT      | Unique ID of the customer                   |
-| `customername`    | VARCHAR     | Name of the customer                        |
+| `customer_id`	    | BIGINT      | Unique ID of the customer                   |
+| `customer_name`   | VARCHAR     | Name of the customer                        |
 | `amount`          | DECIMAL     | Transaction amount                          |
-| `transactiondate` | TIMESTAMP   | Date and time when the transaction occurred |
+| `transaction_date`| TIMESTAMP   | Date and time when the transaction occurred |
 
 ### Sample DDL
 
 ```sql
 CREATE TABLE transactions (
     id BIGSERIAL PRIMARY KEY,
-    customerid BIGINT NOT NULL,
-    customername VARCHAR(255) NOT NULL,
+    customer_id BIGINT NOT NULL,
+    customer_name VARCHAR(255) NOT NULL,
     amount DECIMAL(10, 2) NOT NULL,
-    transactiondate TIMESTAMP NOT NULL
+    transaction_date TIMESTAMP NOT NULL
 );
 ```
 
