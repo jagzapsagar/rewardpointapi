@@ -18,16 +18,16 @@ public class Transaction {
 	@Column(name = "ID")
 	private Long id;
 
-	@Column(name = "CUSTOMERID")
+	@Column(name = "CUSTOMER_ID")
 	private Long customerId;
 
-	@Column(name = "CUSTOMERNAME")
+	@Column(name = "CUSTOMER_NAME")
 	private String customerName;
 
 	@Column(name = "AMOUNT")
 	private Double amount;
 
-	@Column(name = "TRANSACTIONDATE")
+	@Column(name = "TRANSACTION_DATE")
 	private LocalDateTime transactionDate;
 
 	public Transaction() {
